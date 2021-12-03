@@ -6,4 +6,4 @@ CodiePie is an organizer/planner desktop application that aims to make task orga
 
 ![image](https://user-images.githubusercontent.com/55541726/144645669-e5a9f154-21bb-44f4-8bca-7fe0a648e635.png)
 
-Read the user manual: 
+Read the user manual: https://github.com/jonsonkurt/CodiPie/blob/09782bde1566e3c7bdd4a3f37ecd900e56d676fc/CodiPie%20User%20Manual.pdf
