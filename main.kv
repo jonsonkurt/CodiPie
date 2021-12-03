@@ -1,13 +1,17 @@
+# Imports utils color module from kivy
 #:import utils kivy.utils
 
+# Imports the screens from the screen manager
 ScreenManager:
     LoginScreen:
 	RegisterScreen:
 	ForgotScreen:
 	HomeScreen:
 
+# Forms the design and layout of login screen
 <LoginScreen>:
 	name : 'login_screen'
+
 	Widget:
 		canvas:
 			Color:
@@ -25,7 +29,6 @@ ScreenManager:
 				size: self.size
 				pos: self.pos
 				radius: [50, 50, 50, 50]
-
         MDIcon:
 			pos_hint: {'center_x': 0.5, 'center_y' : 0.75}
 			size_hint: (.45, .5)
@@ -70,6 +73,7 @@ ScreenManager:
             pos_hint: {'center_x': 0.737, 'center_y' : 0.355}
 		MDTextFieldRound:
 			id: password
+			password: True
 			hint_text: 'Enter 6 character or more'
 			text_color: rgba('#C69C6D')
 			size_hint: (0.5, None)
@@ -97,15 +101,16 @@ ScreenManager:
 			size_hint: (0.15, None)
 			pos_hint: {'center_x' : 0.5, 'center_y' : 0.140}
 			on_press:
-				#root.do_login(username.text, password.text)
-                #username.text = ""
-                #password.text = ""
+				root.do_login(username.text, password.text)
+                username.text = ""
+                password.text = ""
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = .3
-                root.manager.current = 'home_screen'
 
+# Forms the design and layout of register/signup screen
 <RegisterScreen>:
 	name : 'register_screen'
+
 	Widget:
 		canvas:
 			Color:
@@ -253,8 +258,10 @@ ScreenManager:
 			on_press:
 				root.do_register(fname.text, lname.text, emailid.text, passwd.text, cpass.text)
 
+# Forms the design and layout of forgot password screen
 <ForgotScreen>:
 	name : 'forgot_screen'
+
 	Widget:
 		canvas:
 			Color:
@@ -262,7 +269,125 @@ ScreenManager:
 			Rectangle:
 				size: self.size
 				pos: self.pos
+	MDIconButton:
+		icon : 'keyboard-backspace'
+		pos_hint: {'center_x': 0.05, 'center_y' : 0.94}
+		theme_text_color : 'Custom'
+		text_color : (1, 1, 1, 1)
+		on_press:
+			root.manager.transition.direction = 'right'
+			root.manager.transition.duration = .5
+			root.manager.current = 'login_screen'
+	FloatLayout:
+		pos_hint: {'center_y': 0.5, 'center_x': 0.5}
+		size_hint: 0.85, 0.70
+		canvas:
+			Color:
+				rgba: rgba('#f4ebe2')
+			RoundedRectangle:
+				size: self.size
+				pos: self.pos
+				radius: [50, 50, 50, 50]
+		MDLabel:
+			text : 'Forgot Password'
+			bold: True
+			halign: 'center'
+			theme_text_color: 'Custom'
+			text_color: rgba('#707070')
+			font_style: 'H4'
+			pos_hint : {'center_x': 0.5, 'center_y' : 0.9}
+		MDLabel:
+			text: 'Email Address'
+            bold: True
+			halign: "left"
+			theme_text_color: 'Custom'
+			text_color: rgba('#707070')
+			text_size: (0.4, 0.2)
+            pos_hint: {'center_x': 0.665, 'center_y' : 0.720}
+		MDTextFieldRound:
+			id: reemail
+			hint_text: 'Enter your registered email address'
+			text_color: rgba('#C69C6D')
+			size_hint: (0.65, None)
+			pos_hint: {'center_x' : 0.5, 'center_y' : 0.645}
+			normal_color: rgba('#f4ebe2')
+			fill_color: rgba('#f4ebe2')
+			color_active: rgba('#f4ebe2')
+			color_focus: rgba('#f4ebe2')
+			line_color: rgba('#C69C6D')
+			icon_right: "email"
+			icon_right_color: rgba('#c69c6d')
+		MDLabel:
+			text: 'Enter New Password'
+            bold: True
+			halign: "left"
+			theme_text_color: 'Custom'
+			text_color: rgba('#707070')
+			text_size: (0.4, 0.2)
+            pos_hint: {'center_x': 0.665, 'center_y' : 0.520}
+		MDTextFieldRound:
+			id: pas
+			hint_text: 'Enter your desired password'
+			text_color: rgba('#C69C6D')
+			size_hint: (0.3, None)
+			pos_hint: {'center_x' : 0.325, 'center_y' : 0.450}
+			normal_color: rgba('#f4ebe2')
+			fill_color: rgba('#f4ebe2')
+			color_active: rgba('#f4ebe2')
+			color_focus: rgba('#f4ebe2')
+			line_color: rgba('#C69C6D')
+			icon_right: "key-variant"
+			icon_right_color: rgba('#c69c6d')
+		MDLabel:
+			text: 'Confirm New Password'
+            bold: True
+			halign: "left"
+			theme_text_color: 'Custom'
+			text_color: rgba('#707070')
+			text_size: (0.4, 0.2)
+            pos_hint: {'center_x': 1.015, 'center_y' : 0.520}
+		MDTextFieldRound:
+			id: repas
+			hint_text: 'Please confirm your desired password'
+			text_color: rgba('#C69C6D')
+			size_hint: (0.3, None)
+			pos_hint: {'center_x' : 0.675, 'center_y' : 0.450}
+			normal_color: rgba('#f4ebe2')
+			fill_color: rgba('#f4ebe2')
+			color_active: rgba('#f4ebe2')
+			color_focus: rgba('#f4ebe2')
+			line_color: rgba('#C69C6D')
+			icon_right: "key-variant"
+			icon_right_color: rgba('#c69c6d')
+		MDFillRoundFlatButton:
+			text: '[color=#FFFFFF]              [b]CHANGE PASSWORD[/b]              [/color]'
+			markup: True
+			md_bg_color: rgba('#C69C6D')
+			pos_hint: {'center_x' : 0.5, 'center_y' : 0.155}
+			on_press:
+				root.do_reset(reemail.text, pas.text, repas.text)
 
+# Forms the design and layout of edit hashtag dialog box
+<EditHashtag>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "80dp"
+
+    MDTextField:
+		id: edit_hashtag
+        hint_text: "Insert new or edited hashtag name"
+		line_color_focus: rgba('#C6826D')
+	MDFillRoundFlatButton:
+		text: "Edit"
+		theme_text_color: 'Custom'
+		md_bg_color: rgba('#C6826D')
+		text_color: utils.get_color_from_hex('#F1ECEC')
+		pos_hint: {'center_x': .93, 'center_y': .5}
+		on_release:
+			root.edit_hashtag(edit_hashtag.text)
+
+# Forms the design and layout of add hashtag dialog box
 <AddHashtag>
     orientation: "vertical"
     spacing: "12dp"
@@ -273,7 +398,6 @@ ScreenManager:
 		id: task_hashtag
         hint_text: "Hashtag"
 		line_color_focus: rgba('#C6826D')
-
 	MDFillRoundFlatButton:
 		text: "Add"
 		theme_text_color: 'Custom'
@@ -283,6 +407,7 @@ ScreenManager:
 		on_release:
 			root.add_hashtag(task_hashtag.text)
 
+# Forms the design of checkbox in the add/edit a task dialog box
 <Check@MDCheckbox>:
     group: 'group'
     size_hint: None, None
@@ -290,11 +415,12 @@ ScreenManager:
 	theme_text_color: "Custom"
 	selected_color: rgba('#C6826D')
 
+# Forms the design and layout of add a task dialog box
 <AddTask>
     orientation: "vertical"
     spacing: "12dp"
     size_hint_y: None
-    height: "285dp"
+    height: "310dp"
 
 	task_name: task_name
 	task_details: task_details
@@ -315,17 +441,18 @@ ScreenManager:
 			id: normalc
 			active: False
 			pos_hint: {'center_x': .6, 'center_y': .5}
-
     MDTextField:
 		id: task_name
         hint_text: "Task Name"
 		line_color_focus: rgba('#C6826D')
-
     MDTextField:
 		id: task_details
         hint_text: "Task Details"
 		line_color_focus: rgba('#C6826D')
-
+	MDLabel:
+		id: duedate
+		text: root.get_due_date()
+		halign: 'center'
     MDRaisedButton:
         text: "Set Task Due Date"
 		theme_text_color: "Custom"
@@ -333,7 +460,10 @@ ScreenManager:
 		text_color: utils.get_color_from_hex('#F1ECEC')
         on_release: root.show_date_picker()
 		pos_hint: {'center_x': .5, 'center_y': .5}
-
+	MDLabel:
+		id: duetime
+		text: root.get_due_time()
+		halign: 'center'
     MDRaisedButton:
         text: "Set Task Due Date Time"
 		theme_text_color: "Custom"
@@ -341,7 +471,6 @@ ScreenManager:
 		text_color: utils.get_color_from_hex('#F1ECEC')
         pos_hint: {'center_x': .5, 'center_y': .5}
         on_release: root.show_time_picker()
-
 	MDFillRoundFlatButton:
 		text: "Add"
 		theme_text_color: 'Custom'
@@ -350,8 +479,76 @@ ScreenManager:
 		pos_hint: {'center_x': .93, 'center_y': .5}
 		on_release:
 			root.get_task(task_name.text, task_details.text)
-			importantc.active = True
 
+# Forms the design and layout of edit a task dialog box
+<EditTask>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "310dp"
+
+	task_name: task_name
+	task_details: task_details
+
+    FloatLayout:
+		MDLabel:
+			text: 'Important'
+			pos_hint: {'center_x': .7, 'center_y': .5}
+		Check:
+			id: importantc
+			active: True if root.get_check() == 'important' else False
+			on_active: root.on_checkbox_active1(*args)
+			pos_hint: {'center_x': .4, 'center_y': .5}
+		MDLabel:
+			text: 'Normal'
+			pos_hint: {'center_x': 1.17, 'center_y': .5}
+		Check:
+			id: normalc
+			active: True if root.get_check() == 'normal' else False
+			on_active: root.on_checkbox_active2(*args)
+			pos_hint: {'center_x': .6, 'center_y': .5}
+    MDTextField:
+		id: task_name
+		text: root.get_task_name()
+        hint_text: "Task Name"
+		line_color_focus: rgba('#C6826D')
+    MDTextField:
+		id: task_details
+		text: root.get_task_details()
+        hint_text: "Task Details"
+		line_color_focus: rgba('#C6826D')
+	MDLabel:
+		id: duedate
+		text: root.get_due_date()
+		halign: 'center'
+    MDRaisedButton:
+        text: "Update Task Due Date"
+		theme_text_color: "Custom"
+		md_bg_color: rgba('#C6826D')
+		text_color: utils.get_color_from_hex('#F1ECEC')
+        on_release: root.show_date_picker()
+		pos_hint: {'center_x': .5, 'center_y': .5}
+	MDLabel:
+		id: duetime
+		text: root.get_due_time()
+		halign: 'center'
+    MDRaisedButton:
+        text: "Update Task Due Date Time"
+		theme_text_color: "Custom"
+		md_bg_color: rgba('#C6826D')
+		text_color: utils.get_color_from_hex('#F1ECEC')
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        on_release: root.show_time_picker()
+	MDFillRoundFlatButton:
+		text: "Update"
+		theme_text_color: 'Custom'
+		md_bg_color: rgba('#C6826D')
+		text_color: utils.get_color_from_hex('#F1ECEC')
+		pos_hint: {'center_x': .93, 'center_y': .5}
+		on_release:
+			root.get_task(task_name.text, task_details.text)
+
+# Forms the design and layout of task info dialog box
 <TaskInfo>
     orientation: "vertical"
     spacing: "12dp"
@@ -374,28 +571,7 @@ ScreenManager:
 			id: normalc
 			pos_hint: {'center_x': .6, 'center_y': .5}
 
-<DetailedTaskCard>
-    orientation: "vertical"
-    spacing: "12dp"
-    size_hint_y: None
-    height: "80dp"
-
-    # FloatLayout:
-	# 	MDLabel:
-	# 		text: 'Important'
-	# 		pos_hint: {'center_x': .7, 'center_y': .5}
-	# 	Check:
-	# 		id: importantc
-	# 		active: True
-	# 		#on_active: root.on_checkbox_active(*args)
-	# 		pos_hint: {'center_x': .4, 'center_y': .5}
-	# 	MDLabel:
-	# 		text: 'Normal'
-	# 		pos_hint: {'center_x': 1.17, 'center_y': .5}
-	# 	Check:
-	# 		id: normalc
-	# 		pos_hint: {'center_x': .6, 'center_y': .5}
-
+# Forms the design and layout of main task card in the home screen
 <Card>
     orientation: "vertical"
 	size_hint: None, None
@@ -429,19 +605,18 @@ ScreenManager:
 		theme_text_color: 'Custom'
 		text_color: rgba('#C69C6D')
 
+# Forms the design and layout of detailed task card
 <Card2>
     orientation: "vertical"
 	size_hint: None, None
 	size: "532dp", "88dp"
 	pos_hint: {"center_x": .5, "center_y": .5}
-	#border_radius: [30,30,30,30]
 	radius: 15,15,15,15
 	elevation: 3
 	padding: '15dp'
 	spacing: '18dp'
 
 	on_release:
-		print('try')
 		root.task_dialog(root.title2, root.info, root.details_cut, root.task_idpk)
 
     canvas:
@@ -450,8 +625,6 @@ ScreenManager:
         RoundedRectangle:
             pos: self.pos
             size: self.size
-			#radius: 15,15,15,15
-
 	MDLabel:
 		text: root.title
 		text: '[font=Fonts/segoeuib]' + root.title  + '[/font]'
@@ -468,7 +641,7 @@ ScreenManager:
 		halign: "left"
 		theme_text_color: 'Custom'
 		text_color: rgba('#FFFFFF')
-	FloatLayout: #Line
+	FloatLayout:
 		size_hint: 1, 0.5
 		canvas:
 			Color:
@@ -485,8 +658,49 @@ ScreenManager:
 		theme_text_color: 'Custom'
 		text_color: rgba('#FFFFFF')
 
+# Forms the design and layout of FAQ cards in the FAQ portion of the application
+<Card3>
+    orientation: "vertical"
+	size_hint: None, None
+	size: "727dp", "110dp"
+	border_radius: [30,30,30,30]
+	radius: 15,15,15,15
+	padding: '20dp'
+	spacing: '25dp'
+
+    canvas:
+        Color:
+            rgba: rgba('#F3EBE2')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+			radius: 15,15,15,15
+	MDLabel:
+		text: root.title
+		text: '[font=Fonts/segoeuib]' + root.question  + '[/font]'
+		font_size: '20dp'
+		markup: True
+		halign: "left"
+		theme_text_color: 'Custom'
+		text_color: rgba('#C69C6D')
+	MDLabel:
+		text: root.details
+		text: '[font=Fonts/seguisb]' + root.answer  + '[/font]'
+		font_size: '15dp'
+		markup: True
+		halign: "left"
+		theme_text_color: 'Custom'
+		text_color: rgba('#C69C6D')
+
+# Forms the design and layout of the home screen screen
 <HomeScreen>:
-	name : 'home_screen'
+	name: 'home_screen'
+
+	on_leave:
+		self.ids.hashtag_tasks.clear_widgets()
+        self.ids.container.clear_widgets()
+        self.ids.important_tasks.clear_widgets()
+		self.ids["hash"].text = 'Welcome to CodiPie!'
 
 	Widget:
 		canvas:
@@ -495,11 +709,11 @@ ScreenManager:
 			Rectangle:
 				size: self.size
 				pos: self.pos
-
 	MDBoxLayout:
 		orientation: "vertical"
 
 		MDBoxLayout:
+			# Forms the navigation panel in the leftmost part of the application
 			MDNavigationRail:
 				id: rail
 				md_bg_color: rgba('#f4ebe2')
@@ -511,19 +725,16 @@ ScreenManager:
 					icon: "home"
 					on_release:
 						screen_manager.current = 'home'
-
 				MDNavigationRailItem:
-					icon: "folder-open"
+					icon: "help-box"
 					on_release:
-						screen_manager.current = 'add_section'
-
+						screen_manager.current = 'faq_screen'
 				MDNavigationRailItem:
 					icon: "logout"
 					on_press:
 						root.manager.transition.direction = 'right'
 						root.manager.transition.duration = .3
 						root.manager.current = 'login_screen'
-
 			ScreenManager:
 				id: screen_manager
 
@@ -531,10 +742,10 @@ ScreenManager:
 					name: 'home'
 
 					#Contents of Gray box
-
 					FloatLayout: #White box left
 						pos_hint: {'center_y': 0.5, 'center_x': 0.372}
 						size_hint: 0.70, 0.85
+
 						canvas:
 							Color:
 								rgba: rgba('#FFFFFF')
@@ -542,10 +753,10 @@ ScreenManager:
 								size: self.size
 								pos: self.pos
 								radius: [70, 0, 0, 70]
-
 					FloatLayout: #Gray box left
 						pos_hint: {'center_y': 0.5, 'center_x': 0.122}
 						size_hint: 0.20, 0.85
+
 						canvas:
 							Color:
 								rgba: rgba('#c7c7c7')
@@ -553,7 +764,6 @@ ScreenManager:
 								size: self.size
 								pos: self.pos
 								radius: [70, 0, 0, 70]
-
 					BoxLayout:
 						pos_hint: {'center_y': 0.640, 'center_x': 0.125}
 						size_hint: 0.16, 0.3
@@ -562,7 +772,6 @@ ScreenManager:
 							MDList:
 								id: container
 								index: 0
-
 					MDLabel:
 						text: '[font=Fonts/segoeuib] HASHTAGS [/font]'
 						markup: True
@@ -571,7 +780,6 @@ ScreenManager:
 						text_color: rgba('#FFFFFF')
 						font_size: '18sp'
 						pos_hint: {'center_x': 0.539, 'center_y' : 0.83}
-
 					MDIconButton: #Plus icon
 						icon: 'plus-circle'
 						pos_hint: {'center_x': 0.197, 'center_y': 0.83}
@@ -579,17 +787,16 @@ ScreenManager:
 						theme_text_color: "Custom"
 						text_color: rgba('#FFFFFF')
 						on_release: root.add_hashtag_dialog()
-
 					FloatLayout: #First line in gray box
 						pos_hint: {'center_y': 0.8, 'center_x': 0.123}
 						size_hint: 0.16, 0.002
+
 						canvas:
 							Color:
 								rgba: rgba('#FFFFFF')
 							Rectangle:
 								size: self.size
 								pos: self.pos
-
 					MDLabel:
 						text: '[font=Fonts/segoeuib] TAGS [/font]'
 						markup: True
@@ -598,53 +805,43 @@ ScreenManager:
 						text_color: rgba('#FFFFFF')
 						font_size: '18sp'
 						pos_hint: {'center_x': 0.539, 'center_y' : 0.43}
-
 					FloatLayout: #Second line in gray box
 						pos_hint: {'center_y': 0.4, 'center_x': 0.123}
 						size_hint: 0.16, 0.002
+
 						canvas:
 							Color:
 								rgba: rgba('#FFFFFF')
 							Rectangle:
 								size: self.size
 								pos: self.pos
-
 					MDTextButton:
 						text: '[font=Fonts/seguisb] Important [/font]'
 						markup: True
 						color: rgba('#FFFFFF')
 						font_size: '15sp'
 						pos_hint: {'center_x': 0.110, 'center_y' : 0.375}
-
 					MDIconButton: #Red circle
 						icon: 'checkbox-blank-circle'
 						pos_hint: {'center_x': 0.06, 'center_y' : 0.375}
 						user_font_size: '15sp'
 						theme_text_color: "Custom"
 						text_color: rgba('#C6826D')
-						on_press:
-							root.output()
-
 					MDTextButton:
 						text: '[font=Fonts/seguisb] Normal [/font]'
 						markup: True
 						color: rgba('#FFFFFF')
 						font_size: '15sp'
 						pos_hint: {'center_x': 0.103, 'center_y' : 0.335}
-
 					MDIconButton: #Green circle
 						icon: 'checkbox-blank-circle'
 						pos_hint: {'center_x': 0.06, 'center_y' : 0.335}
 						user_font_size: '15sp'
 						theme_text_color: "Custom"
 						text_color: rgba('#6DC688')
-						on_press:
-							root.output()
-
 					#Contents of Center White
-
 					MDLabel:
-						id: h
+						id: hash
 						text: root.hashtag_label()
 						bold: True
 						markup: True
@@ -655,17 +852,16 @@ ScreenManager:
 						font_size: '23sp'
 						font_name: 'Fonts/seguibl'
 						pos_hint: {'center_y': 0.83, 'center_x': 0.745}
-
 					FloatLayout: #First line in center white box
 						pos_hint: {'center_y': 0.8, 'center_x': 0.470}
 						size_hint: 0.45, 0.002
+
 						canvas:
 							Color:
 								rgba: rgba('#C69C6D')
 							Rectangle:
 								size: self.size
 								pos: self.pos
-
 					MDIconButton: #Plus icon
 						icon: 'plus-circle'
 						pos_hint: {'center_x': 0.690, 'center_y': 0.83}
@@ -673,7 +869,20 @@ ScreenManager:
 						theme_text_color: "Custom"
 						text_color: rgba('#C6826D')
 						on_release: root.add_task_dialog()
-
+					MDIconButton: #Edit icon
+						icon: 'circle-edit-outline'
+						pos_hint: {'center_x': 0.667, 'center_y': 0.83}
+						user_font_size: '18sp'
+						theme_text_color: "Custom"
+						text_color: rgba('#C6826D')
+						on_release: root.edit_hashtag_dialog()
+					MDIconButton: #Delete icon
+						icon: 'delete-circle-outline'
+						pos_hint: {'center_x': 0.645, 'center_y': 0.83}
+						user_font_size: '18sp'
+						theme_text_color: "Custom"
+						text_color: rgba('#C6826D')
+						on_release: root.delete_hashtag_dialog()
 					BoxLayout:
 						pos_hint: {'center_y': 0.46, 'center_x': 0.470}
 						size_hint: 0.45, 0.65
@@ -682,9 +891,6 @@ ScreenManager:
 							id: refresh_layout
 							refresh_callback: root.refresh_callback
 							root_layout: root
-
-							# MDList:
-							# 	id: hashtag_tasks
 
 							ScrollView:
 								MDGridLayout:
@@ -695,10 +901,10 @@ ScreenManager:
 									spacing: '13dp'
 
 					#Contents of Right White Box
-
 					FloatLayout: #White box right
 						pos_hint: {'center_y': 0.5, 'center_x': 0.855}
 						size_hint: 0.25, 0.85
+
 						canvas:
 							Color:
 								rgba: rgba('#FFFFFF')
@@ -706,10 +912,10 @@ ScreenManager:
 								size: self.size
 								pos: self.pos
 								radius: [0, 0, 0, 0]
-
 					FloatLayout:
 						pos_hint: {'center_y': 0.5, 'center_x': 0.855}
 						size_hint: 0.225, 0.80
+
 						canvas:
 							Color:
 								rgba: rgba('#F3EBE2')
@@ -717,10 +923,10 @@ ScreenManager:
 								size: self.size
 								pos: self.pos
 								radius: [30, 30, 30, 30]
-
 					FloatLayout:
 						pos_hint: {'center_y': 0.775, 'center_x': 0.855}
 						size_hint: 0.225, 0.25
+
 						canvas:
 							Color:
 								rgba: rgba('#c7c7c7')
@@ -739,10 +945,10 @@ ScreenManager:
 							font_size: '35sp'
 							font_name: 'Fonts/seguibl'
 							pos_hint: {'center_x': 0.5, 'center_y' : 0.5}
-
 					FloatLayout:
 						pos_hint: {'center_y': 0.375, 'center_x': 0.855}
 						size_hint: 0.225, 0.55
+
 						canvas:
 							Color:
 								rgba: rgba('#C6826D')
@@ -763,13 +969,13 @@ ScreenManager:
 					FloatLayout:
 						pos_hint: {'center_y': 0.525, 'center_x': 0.855}
 						size_hint: 0.175, 0.002
+
 						canvas:
 							Color:
 								rgba: rgba('#FFFFFF')
 							Rectangle:
 								size: self.size
 								pos: self.pos
-
 					BoxLayout:
 						pos_hint: {'center_y': 0.32, 'center_x': 0.855}
 						size_hint: 0.175, 0.37
@@ -782,13 +988,15 @@ ScreenManager:
 								padding: '5dp'
 								spacing: '9dp'
 
+				# Forms the design and layout of the FAQ portion of the application
 				Screen:
-					name: 'add_section'
+					name: 'faq_screen'
 
 					FloatLayout:
 						Widget:
 							pos_hint: {'center_y': 0.5, 'center_x': 0.5}
 							size_hint: .955, 0.85
+
 							canvas:
 								Color:
 									rgba: rgba('#FFFFFF')
@@ -796,59 +1004,93 @@ ScreenManager:
 									size: self.size
 									pos: self.pos
 									radius: [70, 70, 0, 0]
-
-					MDIconButton: #Plus icon
-						icon: 'plus-circle'
-						pos_hint: {'center_x': 0.06, 'center_y': 0.820}
-						theme_text_color: "Custom"
-						text_color: rgba('#C69C6D')
-						on_press:
-							root.output()
-
-					FloatLayout: #Gray box left
+					FloatLayout: #Red box left
 						pos_hint: {'center_y': 0.425, 'center_x': 0.175}
-						size_hint: 0.25, 0.65
+						size_hint: 0.23, 0.60
 						canvas:
 							Color:
-								rgba: rgba('#c7c7c7')
+								rgba: rgba('#C6826D')
 							RoundedRectangle:
 								size: self.size
 								pos: self.pos
-								radius: [0, 0, 0, 0]
+								radius: [40, 40, 40, 40]
+					BoxLayout:
+						pos_hint: {'center_y': 0.425, 'center_x': 0.175}
+						size_hint: 0.2, 0.50
+						orientation: 'vertical'
 
+						MDLabel:
+							text:
+								('[font=Fonts/segoeuib]CodiPie is an organization desktop application \
+								to organize and keep track of your important and daily tasks.[/font]')
+							halign: 'center'
+							font_size: '13dp'
+							markup: True
+							theme_text_color: 'Custom'
+							text_color: rgba('#FFFFFF')
+							pos_hint: {'center_y': 0.85, 'center_x': 0.5}
+						MDLabel:
+							text:
+								("[font=Fonts/segoeuib]The name CodiPie came from the word 'Codify' \
+								meaning to arrange according to a plan or system.[/font]")
+							halign: 'center'
+							font_size: '13dp'
+							markup: True
+							theme_text_color: 'Custom'
+							text_color: rgba('#FFFFFF')
+							pos_hint: {'center_y': 0.6, 'center_x': 0.5}
+						MDLabel:
+							text:
+								("[font=Fonts/segoeuib]This application was developed by Cruzada, Christian \
+								Simon and Jonson, Kurt Jalen from Cavite State University - Main Campus.[/font]")
+							halign: 'center'
+							font_size: '13dp'
+							markup: True
+							theme_text_color: 'Custom'
+							text_color: rgba('#FFFFFF')
+							pos_hint: {'center_y': 0.35, 'center_x': 0.5}
 					FloatLayout: #Line left
 						pos_hint: {'center_y': 0.775, 'center_x': 0.175}
 						size_hint: 0.25, 0.002
+
 						canvas:
 							Color:
 								rgba: rgba('#C69C6D')
 							Rectangle:
 								size: self.size
 								pos: self.pos
-
 					MDLabel:
-						text: '[font=Fonts/segoeuib] Your Hashtags [/font]'
+						text: '[font=Fonts/segoeuib] About the App [/font]'
 						markup: True
 						halign: "left"
 						theme_text_color:'Custom'
 						text_color: rgba('#C69C6D')
 						font_size: '20sp'
-						pos_hint: {'center_x': 0.585, 'center_y' : 0.820}
+						pos_hint: {'center_x': 0.545, 'center_y' : 0.820}
+					MDLabel:
+						text: '[font=Fonts/segoeuib] Frequently Asked Questions [/font]'
+						markup: True
+						halign: "left"
+						theme_text_color:'Custom'
+						text_color: rgba('#C69C6D')
+						font_size: '20sp'
+						pos_hint: {'center_x': 0.815, 'center_y' : 0.820}
+					FloatLayout: #Line right
+						pos_hint: {'center_y': 0.775, 'center_x': 0.635}
+						size_hint: 0.63, 0.002
 
-					FloatLayout: #Line left
-						pos_hint: {'center_y': 0.775, 'center_x': 0.63}
-						size_hint: 0.6, 0.002
 						canvas:
 							Color:
 								rgba: rgba('#C69C6D')
 							Rectangle:
 								size: self.size
 								pos: self.pos
+					BoxLayout:
+						pos_hint: {'center_y': 0.435, 'center_x': 0.635}
+						size_hint: 0.63, 0.65
+						padding: '15dp'
 
-					MDIconButton: #Plus icon
-						icon: 'plus-circle'
-						pos_hint: {'center_x': .922, 'center_y': 0.820}
-						theme_text_color: "Custom"
-						text_color: rgba('#C69C6D')
-						on_press:
-							root.output()
+						ScrollView:
+							MDList:
+								id: faq
+								spacing: '13dp'
