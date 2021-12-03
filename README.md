@@ -1,1 +1,1 @@
-Welcome to CodiPie! A Python desktop application to organize your everyday tasks. This program is built using KivyMD.
+Welcome to CodiPie! A Python desktop application to organize your everyday tasks. This program is built using Kivy and KivyMD.
